@@ -38,6 +38,10 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
             <li><hr class="dropdown-divider"></li>
+            @if (auth()->user()->role_id == 2)
+            <li><a class="dropdown-item" href="/dashboard/artikel"><i class="bi bi-layout-text-sidebar-reverse"></i>Artikel Controll</a></li>
+            <li><hr class="dropdown-divider"></li>
+            @endif
             <li>
               <form action="/logout" method="post">  
                 @csrf
@@ -100,6 +104,10 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
             <li><hr class="dropdown-divider"></li>
+            @if (auth()->user()->role_id == 2)
+            <li><a class="dropdown-item" href="/dashboard/artikel"><i class="bi bi-layout-text-sidebar-reverse"></i>Artikel Controll</a></li>
+            <li><hr class="dropdown-divider"></li>
+            @endif
             <li>
               <form action="/logout" method="post">  
                 @csrf

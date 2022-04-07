@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RiwayatKuponController;
 use App\Http\Controllers\CariUniversalController;
 use App\Http\Controllers\DashboardArtikelController;
+use App\Http\Controllers\SocialShareButtonsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,12 +109,6 @@ use App\Http\Controllers\DashboardArtikelController;
     });
 
     Route::get('/layanan/tunggu-lagi-lagi', function(){
-        $poinSekarang = JumlahPoin::all()->where('user_id',auth()->user()->id)[0]->poin;
-        $poinSekarang += 50;
-        $updatePoin = DB::table('jumlah_poins')->where('user_id',auth()->user()->id)->update([
-            'poin' => $poinSekarang
-        ]);
-
         return view('setortunggu3',[
             'title' => 'Setor'
         ]);
@@ -150,10 +145,12 @@ use App\Http\Controllers\DashboardArtikelController;
     Route::post('/dashboard/claimVoucher', [DashboardController::class, 'claimVoucher']);
     Route::get('/dashboard/riwayat-kupon', [RiwayatKuponController::class, 'index'])->middleware('auth');
     Route::resource('/dashboard/artikel', DashboardArtikelController::class)->middleware('auth');
-// akhir dashboard ----------------------
+    // akhir dashboard ----------------------
 
 // Rerouting ----------------------------
     Route::get('/layanan', function () {
         return redirect('/layanan/kolega');
     });
 // akhir rerouting ----------------------
+
+Route::get('/social-media-share', [SocialShareButtonsController::class,'ShareWidget']);

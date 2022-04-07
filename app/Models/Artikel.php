@@ -26,12 +26,6 @@ class Artikel extends Model
             $query->where('slug', $category)
             )
         );
-        
-        $query->when($filters['user'] ?? false, fn($query, $user)=>
-            $query->whereHas('user', fn($query)=>
-            $query->where('name', $user)
-            )
-        );
 
     }
 

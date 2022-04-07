@@ -18,20 +18,16 @@ class ArtikelController extends Controller
             $title = ' in ' . $category->name;
         }
 
-        if(request('user')){
-            $user = User::firstWhere('name', request('user'));
-            $title = ' by ' . $user->name;
-        }
-
         return view('artikel', [
             "title" => "Artikel " . $title,
-            "artikel" => Artikel::latest()->filter(request(['search', 'category', 'user']))->paginate(7)->withQueryString(),
+            "artikel" => Artikel::latest()->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
             "listCategory" => Category::all(),
             'active' => 'artikel'
         ]);
     }
 
     public function show( Artikel $artikel ){
+
         return view('artikelSingle',[
             "title" => $artikel->title,
             "artikel" => $artikel,

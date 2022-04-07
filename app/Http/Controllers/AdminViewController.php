@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Artikel;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
-class DashboardArtikelController extends Controller
+class AdminViewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class DashboardArtikelController extends Controller
      */
     public function index()
     {
-        return view('/dashboard/artikel/index',[
-            'artikel' => Artikel::latest()->paginate(15)->withQueryString()
+        return view('dashboard/usercontroll/index',[
+            'users' => User::all()->where('role_id', 1),
+            'title' => 'Admin View'
         ]);
-        
     }
 
     /**
@@ -45,23 +45,21 @@ class DashboardArtikelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Artikel  $artikel
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Artikel $artikel)
+    public function show(User $user)
     {
-        return view('dashboard/artikel/show',[
-            'artikel' => $artikel
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Artikel  $artikel
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Artikel $artikel)
+    public function edit(User $user)
     {
         //
     }
@@ -70,23 +68,23 @@ class DashboardArtikelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Artikel  $artikel
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Artikel $artikel)
+    public function update(Request $request, User $user)
     {
-        
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Artikel  $artikel
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Artikel $artikel)
+    public function destroy(User $user)
     {
-        Artikel::destroy($artikel->id);
-        return redirect('/dashboard/artikel')->with('success','artikel has been deleted!');
+        DB::table('users')->where('id',$user->id)->delete();
+        return redirect('/dashboard/usercontroll')->with('success','Akun ini telah dihapus!');
     }
 }

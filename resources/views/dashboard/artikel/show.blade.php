@@ -12,17 +12,8 @@
                         <span data-feather="arrow-left"></span> Back to Post
                     </button>
                 </a>
-                <a href="">
-                    <button class="btn btn-warning my-3">
-                        <span data-feather="edit"></span> Edit
-                    </button>
-                </a>
-                <a href="">
-                    <button class="btn btn-danger my-3">
-                        <span data-feather="trash-2"></span> Delete
-                    </button>
-                </a>
-                <img src="https://source.unsplash.com/1200x400?{{ $artikel->category->name }}" class="img-fluid mb-4" alt="{{ $artikel->category->name }}">
+                <img src="/img/artikel1/artikel-{{ $artikel->id }}.jpg" class="img-fluid mb-4" alt="{{ $artikel->slug }}">
+                {{ $artikel->created_at->toDateString() }}
                 {!! $artikel->body !!}
                 {{-- 
                     tag di atas akan menghilangkan efek HTMLSpecialChars

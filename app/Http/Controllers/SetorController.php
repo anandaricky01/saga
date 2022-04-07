@@ -6,6 +6,7 @@ use App\Models\JenisSampah;
 use App\Models\RiwayatAntar;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use function PHPUnit\Framework\isEmpty;
 
 class SetorController extends Controller
@@ -30,6 +31,13 @@ class SetorController extends Controller
         $alamat = $request->alamat;
         $alamat_pengiriman = $request->alamat_pengiriman;
         $deskripsi_alamat = $request->deskripsi_alamat;
+
+        $poinSekarang = auth()->user()->poin->poin;
+        $poinSekarang += 50; 
+        $updatePoin = DB::table('jumlah_poins')->where('user_id',auth()->user()->id)->update([
+            'poin' => $poinSekarang
+        ]);
+        
         if ($berat < 0) {
             dd($berat);
             return redirect('/layanan/setor-barang');

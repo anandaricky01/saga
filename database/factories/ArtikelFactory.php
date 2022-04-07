@@ -29,8 +29,7 @@ class ArtikelFactory extends Factory
                             return "<p>$p</p>";
                         })
                         ->implode(''),
-            'category_id'=> mt_rand(1,5),
-            'user_id'=> mt_rand(1,5)
+            'category_id'=> mt_rand(1,5)
         ];
     }
 }
